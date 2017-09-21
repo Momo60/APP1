@@ -9,30 +9,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
-
 namespace APP1
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-
-            var secretKey = new SymmetricSecurityKey(Endoding.UTF8.GetBytes("a secret that needs to be at least 16 characters long"));
-
-            var claims = new Claim[] {
-                new Claim(ClaimTypes.Name, "John"),
-                new Claim(JwtRegisteredClaimNames.Email, "john.doe@blinkingcaret.com"),
-                new Claim(JwtRegisteredClaimNames.Exp, $"{new DateTimeOffset(DateTime.Now.AddDays(1)).ToUnixTimeSeconds()}"),
-                new Claim(JwtRegisteredClaimNames.Nbf, $"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}")
-
-            };
-
-            var token = new JwtSecurityToken(new JwtHeader(new SigningCredentials(key, SecurityAlgorithms.HmacSha256)), new JwtPayload(claims));
-            string jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
-
             BuildWebHost(args).Run();
         }
 

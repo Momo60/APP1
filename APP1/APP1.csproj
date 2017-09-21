@@ -11,6 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.server.Kestrel.Https" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.0.0" />
     <PackageReference Include="System.IdentityModel.tokens.Jwt" Version="5.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
@@ -18,5 +19,14 @@
   <ItemGroup>
     <Compile Remove="Models\TodoItem.cs" />
     <Compile Remove="Controllers\TodoController.cs" />
+    <Compile Remove="Models\ISondageDAO.cs" />
+    <Compile Remove="Models\ISondageService.cs" />
+    <Compile Remove="Models\SimpleSondageDAO.cs" />
+    <Compile Remove="Controllers\TokenController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\ISondageDAO.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <None Include="Models\ISondageService.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <None Include="Models\SimpleSondageDAO.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
 </Project>
