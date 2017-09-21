@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace APP1.Models
 {
 	public class TodoItem
@@ -8,5 +7,4 @@ namespace APP1.Models
 		public string Name { get; set; }
 		public bool IsComplete { get; set; }
 	}
-
 }

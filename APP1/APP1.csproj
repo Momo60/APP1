@@ -16,7 +16,10 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Models\TodoItem.cs" />
     <Compile Remove="Controllers\TodoController.cs" />
+    <Compile Remove="Models\ISondageService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\ISondageService.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
 </Project>

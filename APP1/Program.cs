@@ -20,7 +20,7 @@ namespace APP1
         public static void Main(string[] args)
         {
 
-            var secretKey = new SymmetricSecurityKey(Endoding.UTF8.GetBytes("a secret that needs to be at least 16 characters long"));
+           // var secretKey = new SymmetricSecurityKey(Endoding.UTF8.GetBytes("a secret that needs to be at least 16 characters long"));
 
             var claims = new Claim[] {
                 new Claim(ClaimTypes.Name, "John"),
@@ -30,8 +30,8 @@ namespace APP1
 
             };
 
-            var token = new JwtSecurityToken(new JwtHeader(new SigningCredentials(key, SecurityAlgorithms.HmacSha256)), new JwtPayload(claims));
-            string jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+          //  var token = new JwtSecurityToken(new JwtHeader(new SigningCredentials(key, SecurityAlgorithms.HmacSha256)), new JwtPayload(claims));
+         //   string jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
             BuildWebHost(args).Run();
         }

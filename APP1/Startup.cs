@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore; /*Ajout pour le Dossier Model*/
 using APP1.Models; /*Ajout*/
 using Microsoft.AspNetCore.Rewrite;
 
+
 namespace APP1
 {
     public class Startup
@@ -23,11 +24,27 @@ namespace APP1
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-        }
+
+
+
+
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+			services.AddMvc();
+		}
+
+
+
+
+
+
+
+
+
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

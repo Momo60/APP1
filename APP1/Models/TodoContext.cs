@@ -10,7 +10,7 @@ namespace APP1.Models
 		{
 		}
 
-		//public DbSet<TodoItem> TodoItems { get; set; }
+		public DbSet<TodoItem> TodoItems { get; set; }
 
 	}
 }
