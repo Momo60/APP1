@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore; /*Ajout pour le Dossier Model*/
 using APP1.Models; /*Ajout*/
+using Microsoft.AspNetCore.Rewrite;
 
 namespace APP1
 {
@@ -35,6 +36,11 @@ namespace APP1
             {
                 app.UseDeveloperExceptionPage();
             }
+
+			var options = new RewriteOptions()
+			   .AddRedirectToHttps();
+
+            app.UseRewriter(options);
 
             app.UseMvc();
         }
