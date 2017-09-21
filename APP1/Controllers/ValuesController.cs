@@ -11,32 +11,32 @@ namespace APP1.Controllers
 {
     /*
 	[Route("api/[controller]")]
-	public class TodoController : Controller
+	public class SondageController : Controller
 	{
-		private readonly TodoContext _context;
+		private readonly SondageContext _context;
 
-		public TodoController(TodoContext context)
+		public SondageController(SondageContext context)
 		{
 			_context = context;
 
-			if (_context.TodoItems.Count() == 0)
+			if (_context.SondageItems.Count() == 0)
 			{
-				_context.TodoItems.Add(new TodoItem { Name = "Item1" });
+				_context.SondageItems.Add(new SimpleSondageDAO());
 				_context.SaveChanges();
 			}
 		}
 	
 
 	[HttpGet]
-	public IEnumerable<TodoItem> GetAll()
+	public IEnumerable<SondageItem> GetAll()
 	{
-		return _context.TodoItems.ToList();
+		return _context.SondageItems.ToList();
 	}
 
-	[HttpGet("{id}", Name = "GetTodo")]
+	[HttpGet("{id}", Name = "GetSondage")]
 	public IActionResult GetById(long id)
 	 { 
-		var item = _context.TodoItems.FirstOrDefault(t => t.Id == id);
+		var item = _context.SondageItems.FirstOrDefault(t => t.Id == id);
 		if (item == null)
 		{
 			return NotFound();
