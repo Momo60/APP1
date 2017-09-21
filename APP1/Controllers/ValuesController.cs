@@ -9,7 +9,7 @@ using APP1.Models;
 
 namespace APP1.Controllers
 {
-
+    /*
 	[Route("api/[controller]")]
 	public class TodoController : Controller
 	{
@@ -44,11 +44,11 @@ namespace APP1.Controllers
 		return new ObjectResult(item);
 	 }
     }
+*/
 
 
 
-
-	/*
+	
      [Route("api/[controller]")]
     public class ValuesController : Controller
     {
@@ -84,6 +84,6 @@ namespace APP1.Controllers
         {
         }
     }
-    */
+
 
 }
