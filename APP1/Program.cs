@@ -24,7 +24,9 @@ namespace APP1
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-				.UseKestrel(options => /*Config du WebServer avec le HTTPS*/
+
+				/*Config du WebServer avec le HTTPS*/ 
+				.UseKestrel(options => 
 				{
                     /*Pour changer le port modifier le chiffre*/
 					options.Listen(IPAddress.Loopback, 5001, listenOptions =>

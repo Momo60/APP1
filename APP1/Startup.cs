@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore; /*Ajout pour le Dossier Model*/
+using APP1.Models; /*Ajout*/
 
 namespace APP1
 {

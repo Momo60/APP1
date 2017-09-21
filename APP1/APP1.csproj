@@ -16,5 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Poll.cs" />
+    <Compile Remove="Models\TodoItem.cs" />
+    <Compile Remove="Controllers\TodoController.cs" />
   </ItemGroup>
 </Project>
