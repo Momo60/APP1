@@ -66,8 +66,9 @@ namespace APP1.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public string Post()
         {
+            return "YES";
         }
 
         // PUT api/values/5

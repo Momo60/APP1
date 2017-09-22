@@ -13,14 +13,14 @@ namespace APP1
 {
     public class AuthUser
     {
-        public static string GenerateToken()
+        public static string GenerateToken(string userId)
         {
 			// secretKey contains a secret passphrase only your server knows
-			var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("a secret that needs to be at least 16 characters long"));
+			var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("stephane_mohammed"));
 
 			var claims = new Claim[] {
-			new Claim(ClaimTypes.Name, "John"),
-			new Claim(JwtRegisteredClaimNames.Email, "john.doe@blinkingcaret.com"),
+                new Claim(ClaimTypes.Name, userId),
+                new Claim(JwtRegisteredClaimNames.Email, userId+"@usherbrooke.ca"),
 			new Claim(JwtRegisteredClaimNames.Exp, $"{new DateTimeOffset(DateTime.Now.AddDays(1)).ToUnixTimeSeconds()} "),
 			new Claim(JwtRegisteredClaimNames.Nbf, $"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()} ")
 			};

@@ -14,11 +14,12 @@ namespace APP1.Controllers
     [Route("api/[controller]")]
     public class TokenController : Controller
     {
+        /*Envoi d'un nom en tant que Username*/
         [HttpPost]
-		public object Post()
+        public IActionResult Post(string userId)
 		{
             /*Génération et Renvoie du token*/
-			return new ObjectResult(AuthUser.GenerateToken());
+            return new ObjectResult(AuthUser.GenerateToken(userId));
 		}
 
     }
