@@ -9,7 +9,7 @@ using APP1.Models;
 
 namespace APP1.Controllers
 {
-    /*
+	/*
 	[Route("api/[controller]")]
 	public class SondageController : Controller
 	{
@@ -46,8 +46,6 @@ namespace APP1.Controllers
     }
 */
 
-
-
 	
      [Route("api/[controller]")]
     public class ValuesController : Controller
@@ -83,6 +81,7 @@ namespace APP1.Controllers
         public void Delete(int id)
         {
         }
+
     }
 
 
