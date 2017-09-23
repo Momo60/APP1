@@ -26,15 +26,7 @@ namespace APP1.Controllers
         [HttpGet]
         public IEnumerable<Poll> GetAll()
         {
-            /*return new Poll[] {ISondageDAO. };*/
-            //return "Bonjour";
-            /*  return new ObjectResult(SimpleSondageDAO.GetAvailablePolls()); */
-            /*return Json(SimpleSondageDAO.GetAvailablePolls());*/
-
-
-            return Json(
-                SimpleSondageDAO.GetAvailablePolls();
-            );
+            return new SimpleSondageDAO().GetAvailablePolls(); 
         }
 
     }
