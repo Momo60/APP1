@@ -16,8 +16,9 @@ namespace APP1.Controllers
             return new SimpleSondageDAO().GetAvailablePolls();
         }
 
+        // POST api/sondage
         [HttpPost]
-        public PollQuestion Post(int pollId,int currentQuestionId)
+        public PollQuestion Post(int pollId,int currentQuestionId, string answer)
 		{
             return new SimpleSondageDAO().GetNextQuestion(pollId, currentQuestionId);
 		}
