@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using APP1.Models;
 
 
 
@@ -46,7 +46,7 @@ namespace APP1.Controllers
     }
 */
 
-	
+	//[Authorize]
      [Route("api/[controller]")]
     public class ValuesController : Controller
     {

@@ -18,6 +18,8 @@
   <ItemGroup>
     <Compile Remove="Controllers\TodoController.cs" />
     <Compile Remove="Models\ISondageService.cs" />
+    <Compile Remove="Models\SondageItem.cs" />
+    <Compile Remove="Models\SondageContxt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\ISondageService.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
