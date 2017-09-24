@@ -28,16 +28,26 @@ namespace APP1.Controllers
 
         // POST api/sondage
         [HttpPost]
-        public PollQuestion Post(int pollId,int currentQuestionId, string answer)
+        public PollQuestion Post(int pollId,int currentQuestionId, string answer, string username)
 		{
+
 			if (ValidateToken(Request.Headers["Authorization"]))
 			{
+				PollQuestion responseQuestion = new PollQuestion();
+				responseQuestion.PollId = pollId;
+				responseQuestion.Text = answer;
+
+				int userId = int.Parse(username);
+
+                if (!String.IsNullOrEmpty(answer)) {
+                    new SimpleSondageDAO().SaveAnswer(userId, responseQuestion);
+                }
+                
 				return new SimpleSondageDAO().GetNextQuestion(pollId, currentQuestionId);
             } else {
                 return null;
             }
 
-            //return new SimpleSondageDAO().GetNextQuestion(pollId, currentQuestionId);
 		}
 
 
