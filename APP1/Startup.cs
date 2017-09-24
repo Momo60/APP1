@@ -27,10 +27,10 @@ namespace APP1 {
 				  jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
 				  {
 					  ValidateIssuerSigningKey = true,
-					  IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your secret goes here")),
+					  IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("P@ssw0rd")),
 
 					  ValidateIssuer = true,
-					  ValidIssuer = "The name of the issuer",
+					  ValidIssuer = "University",
 
 					  ValidateAudience = true,
 					  ValidAudience = "The name of the audience",
