@@ -12,33 +12,35 @@ namespace APP1.Controllers
 	[Route("api/[controller]")]
 	public class SondageController : Controller
 	{
-		// GET api/sondage
-		[HttpGet]
+        // GET api/sondage
+        [HttpGet]
         public IEnumerable<Poll> GetAll()
         {
-            if (!ValidateToken(Request.Headers["Authorization"]))
+            if (ValidateToken(Request.Headers["Authorization"]))
             {
-                return notAuth();
+                return new SimpleSondageDAO().GetAvailablePolls();
+            } else {
+                return null;
             }
 
-            return new SimpleSondageDAO().GetAvailablePolls();
+           //return new SimpleSondageDAO().GetAvailablePolls();
         }
 
         // POST api/sondage
         [HttpPost]
         public PollQuestion Post(int pollId,int currentQuestionId, string answer)
 		{
-			if (!ValidateToken(Request.Headers["Authorization"]))
+			if (ValidateToken(Request.Headers["Authorization"]))
 			{
-                notAuth();
-			}
+				return new SimpleSondageDAO().GetNextQuestion(pollId, currentQuestionId);
+            } else {
+                return null;
+            }
 
-            return new SimpleSondageDAO().GetNextQuestion(pollId, currentQuestionId);
+            //return new SimpleSondageDAO().GetNextQuestion(pollId, currentQuestionId);
 		}
 
-        public UnauthorizedResult notAuth(){
-            return Unauthorized();
-        }
+
 
 		public bool ValidateToken(string token)
 		{
