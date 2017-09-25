@@ -1,89 +1,71 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-
-
+using Newtonsoft.Json;
 
 namespace APP1.Controllers
 {
-	/*
-	[Route("api/[controller]")]
-	public class SondageController : Controller
-	{
-		private readonly SondageContext _context;
-
-		public SondageController(SondageContext context)
-		{
-			_context = context;
-
-			if (_context.SondageItems.Count() == 0)
-			{
-				_context.SondageItems.Add(new SimpleSondageDAO());
-				_context.SaveChanges();
-			}
-		}
-	
-
-	[HttpGet]
-	public IEnumerable<SondageItem> GetAll()
-	{
-		return _context.SondageItems.ToList();
-	}
-
-	[HttpGet("{id}", Name = "GetSondage")]
-	public IActionResult GetById(long id)
-	 { 
-		var item = _context.SondageItems.FirstOrDefault(t => t.Id == id);
-		if (item == null)
-		{
-			return NotFound();
-		}
-		return new ObjectResult(item);
-	 }
-    }
-*/
-
-	//[Authorize]
-     [Route("api/[controller]")]
+    /*[Authorize]*/  /*Pour utilisation du token générer, cela permet de bloquer la route entièrement*/
+    [Route("api/[controller]")]
     public class ValuesController : Controller
     {
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            if (ValidateToken(Request.Headers["Authorization"]))
+            {
+                return new string[] { "value1", "value2" };
+            } else {
+                return null;
+            }
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "Hello";
+            if (ValidateToken(Request.Headers["Authorization"]))
+            {
+                return "Hello"+id;
+            } else {
+                return "Not Authorized";
+            }
         }
 
         // POST api/values
         [HttpPost]
         public string Post()
         {
-            return "YES";
+			if (ValidateToken(Request.Headers["Authorization"]))
+			{
+				return "POST";
+			}
+			else
+			{
+				return "Not Authorized";
+			}
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        /***************************************
+         * Fonction l'authentifiction du token *
+         * *************************************/
+		public bool ValidateToken(string token)
+		{
+			string myToken = System.IO.File.ReadAllText("token.json");
+			dynamic key = JsonConvert.DeserializeObject(myToken);
+			foreach (var values in key.tokens)
+			{
+				if (token == (string)values.token)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
-    }
+
+	}
 
 
 }

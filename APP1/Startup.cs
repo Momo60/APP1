@@ -1,9 +1,8 @@
-﻿using System; using System.Collections.Generic; using System.Linq; using System.Threading.Tasks; using Microsoft.AspNetCore.Builder; using Microsoft.AspNetCore.Hosting; using Microsoft.Extensions.Configuration; using Microsoft.Extensions.DependencyInjection; using Microsoft.Extensions.Logging; using Microsoft.Extensions.Options; using Microsoft.EntityFrameworkCore; /*Ajout pour le Dossier Model*/
-
+﻿using System; using Microsoft.AspNetCore.Builder; using Microsoft.AspNetCore.Hosting; using Microsoft.Extensions.Configuration; using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Rewrite; using Microsoft.IdentityModel.Tokens; using System.Text;
 
 namespace APP1 {
-	public class Startup
+    public class Startup
 	{
 
 		public Startup(IConfiguration configuration)
@@ -13,7 +12,11 @@ namespace APP1 {
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
+
+		/*****************************************/
+		/***Méthode pour la génération du token***/
+		/***Mis en place mais non utilisé ici*****/
+        /*****************************************/
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddMvc();
@@ -37,7 +40,6 @@ namespace APP1 {
 
 					  ValidateLifetime = true, //validate the expiration and not before values in the token                   ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date                };
 			  });
-
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,13 +49,13 @@ namespace APP1 {
 			{
 				app.UseDeveloperExceptionPage();
 			}
-
+             /*Redirection vers l'HTTPS*/
 			var options = new RewriteOptions()
-			.AddRedirectToHttps();
+			    .AddRedirectToHttps();
 
 			app.UseRewriter(options);
 
-			app.UseAuthentication();
+			app.UseAuthentication(); /*Pour l'authentification*/
 
 			app.UseMvc();
 		}

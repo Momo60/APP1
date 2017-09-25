@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using USherbrooke.ServiceModel.Sondage;
 
 namespace APP1.Controllers
 {
-	[Route("api/[controller]")]
+    /*[Authorize]*/  /*Pour utilisation du token générer, cela permet de bloquer la route entièrement*/
+    [Route("api/[controller]")]
 	public class SondageController : Controller
 	{
         // GET api/sondage
@@ -19,24 +16,23 @@ namespace APP1.Controllers
             if (ValidateToken(Request.Headers["Authorization"]))
             {
                 return new SimpleSondageDAO().GetAvailablePolls();
-            } else {
+            } else 
+            {
                 return null;
             }
-
-           //return new SimpleSondageDAO().GetAvailablePolls();
         }
 
         // POST api/sondage
         [HttpPost]
         public PollQuestion Post(int pollId,string currentQuestionId, string answer, string username, string test)
 		{
-
 			if (ValidateToken(Request.Headers["Authorization"]))
 			{
                 string a = currentQuestionId;
 
-				if (a == "11" || a == "12"|| a =="13"|| a =="21" ||a =="22"||a =="23") {
-					PollQuestion responseQuestion = new PollQuestion();
+				if (a == "11" || a == "12"|| a =="13"|| a =="21" ||a =="22"||a =="23") 
+                {
+                    PollQuestion responseQuestion = new PollQuestion();
 					responseQuestion.PollId = pollId;
 					responseQuestion.Text = answer;
 
@@ -47,20 +43,14 @@ namespace APP1.Controllers
 					int b = int.Parse(currentQuestionId);
 
 					return new SimpleSondageDAO().GetNextQuestion(pollId, b);
-
-				}
-
+			    }
 
 				int c = int.Parse(currentQuestionId);
 
 				if (currentQuestionId == "-1" && test =="first")
                 {
-                   
                     return new SimpleSondageDAO().GetNextQuestion(pollId, c);
-                   
-
                 }
-
 
                 if (currentQuestionId == "-1" && test =="second")
                 {
@@ -69,7 +59,8 @@ namespace APP1.Controllers
 					responseQuestion.PollId = pollId;
 					responseQuestion.Text = answer;
 
-                    if (pollId == 1) {
+                    if (pollId == 1) 
+                    {
 						new SimpleSondageDAO().SaveAnswer(userId, responseQuestion);
 						return new SimpleSondageDAO().GetNextQuestion(1, 11);
                     }
@@ -79,20 +70,19 @@ namespace APP1.Controllers
 						new SimpleSondageDAO().SaveAnswer(userId, responseQuestion);
 						return new SimpleSondageDAO().GetNextQuestion(2, 21);
 					}
-				
                 }
 
-
-            } else {
+            } else 
+            {
                 return null;
             }
             return null;
-
-            //return new SimpleSondageDAO().GetNextQuestion(pollId, currentQuestionId);
-		}
+        }
 
 
-
+		/***************************************
+         * Fonction l'authentifiction du token *
+         * *************************************/
 		public bool ValidateToken(string token)
 		{
 			string myToken = System.IO.File.ReadAllText("token.json");
@@ -106,8 +96,6 @@ namespace APP1.Controllers
 			}
 			return false;
 		}
-
-       
     }
 
 }

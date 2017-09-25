@@ -1,9 +1,9 @@
 ﻿/**************************************
 * Méthode pour la génération du token *
+*   Mis en pace mais non utilisé ici  *
 ***************************************/
 
 using System;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
@@ -15,7 +15,7 @@ namespace APP1
     {
         public static string GenerateToken(string userId)
         {
-			// secretKey contains a secret passphrase only your server knows
+			/* le secretKet contient le mot de passe pour le token*/
 			var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("stephane_mohammed"));
 
 			var claims = new Claim[] {

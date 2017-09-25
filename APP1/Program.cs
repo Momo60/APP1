@@ -1,17 +1,6 @@
-﻿using System;
-using System.Net; /*Ajout pour le HTTPS*/
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Net; /*Ajout pour le HTTPS*/
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace APP1
 {
@@ -23,24 +12,27 @@ namespace APP1
             BuildWebHost(args).Run();
         }
 
+        /******************************/
+        /****Mise en place du HTTPS****/
+        /******************************/
 
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
 
-				/*Config du WebServer avec le HTTPS*/ 
-				.UseKestrel(options => 
-				{
+                /*Config du WebServer avec le HTTPS*/
+                .UseKestrel(options =>
+                {
                     /*Pour changer le port modifier le chiffre*/
-					options.Listen(IPAddress.Loopback, 5001, listenOptions =>
-					{
+                    options.Listen(IPAddress.Loopback, 5001, listenOptions =>
+                    {
                         /*Utilisation des certificats*/
-						listenOptions.UseHttps("certificat.pfx", "P@ssw0rd");
-					});
-				})
-                   
+                        listenOptions.UseHttps("certificat.pfx", "P@ssw0rd");
+                    });
+                })
+
                 .Build();
-                       
+        }
     }
 }
