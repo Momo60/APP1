@@ -28,26 +28,67 @@ namespace APP1.Controllers
 
         // POST api/sondage
         [HttpPost]
-        public PollQuestion Post(int pollId,int currentQuestionId, string answer, string username)
+        public PollQuestion Post(int pollId,string currentQuestionId, string answer, string username, string test)
 		{
 
 			if (ValidateToken(Request.Headers["Authorization"]))
 			{
-				PollQuestion responseQuestion = new PollQuestion();
-				responseQuestion.PollId = pollId;
-				responseQuestion.Text = answer;
+                string a = currentQuestionId;
 
-				int userId = int.Parse(username);
+				if (a == "11" || a == "12"|| a =="13"|| a =="21" ||a =="22"||a =="23") {
+					PollQuestion responseQuestion = new PollQuestion();
+					responseQuestion.PollId = pollId;
+					responseQuestion.Text = answer;
 
-                if (!String.IsNullOrEmpty(answer)) {
+					int userId = int.Parse(username);
+
                     new SimpleSondageDAO().SaveAnswer(userId, responseQuestion);
+
+					int b = int.Parse(currentQuestionId);
+
+					return new SimpleSondageDAO().GetNextQuestion(pollId, b);
+
+				}
+
+
+				int c = int.Parse(currentQuestionId);
+
+				if (currentQuestionId == "-1" && test =="first")
+                {
+                   
+                    return new SimpleSondageDAO().GetNextQuestion(pollId, c);
+                   
+
                 }
-                
-				return new SimpleSondageDAO().GetNextQuestion(pollId, currentQuestionId);
+
+
+                if (currentQuestionId == "-1" && test =="second")
+                {
+					int userId = int.Parse(username);
+					PollQuestion responseQuestion = new PollQuestion();
+					responseQuestion.PollId = pollId;
+					responseQuestion.Text = answer;
+
+                    if (pollId == 1) {
+						new SimpleSondageDAO().SaveAnswer(userId, responseQuestion);
+						return new SimpleSondageDAO().GetNextQuestion(1, 11);
+                    }
+
+					if (pollId == 2)
+					{
+						new SimpleSondageDAO().SaveAnswer(userId, responseQuestion);
+						return new SimpleSondageDAO().GetNextQuestion(2, 21);
+					}
+				
+                }
+
+
             } else {
                 return null;
             }
+            return null;
 
+            //return new SimpleSondageDAO().GetNextQuestion(pollId, currentQuestionId);
 		}
 
 
