@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using USherbrooke.ServiceModel.Sondage; /*Ajout*/
 
 namespace APP1.Controllers
 {
@@ -10,12 +11,14 @@ namespace APP1.Controllers
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> Get() /*a remplacer avec string*/
         {
             if (ValidateToken(Request.Headers["Authorization"]))
             {
-                return new string[] { "value1", "value2" };
-            } else {
+				return new string[] { "value1", "value2" };
+                //return new SimpleSondageDAO().SaveAnswer();
+
+			} else {
                 return null;
             }
         }

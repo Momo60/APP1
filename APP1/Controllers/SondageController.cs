@@ -67,7 +67,7 @@ namespace APP1.Controllers
 
 					if (pollId == 2)
 					{
-						new SimpleSondageDAO().SaveAnswer(userId, responseQuestion);
+                        new SimpleSondageDAO().SaveAnswer(userId, responseQuestion);
 						return new SimpleSondageDAO().GetNextQuestion(2, 21);
 					}
                 }
